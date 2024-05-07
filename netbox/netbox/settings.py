@@ -70,7 +70,7 @@ REDIS = getattr(configuration, 'REDIS')
 SECRET_KEY = getattr(configuration, 'SECRET_KEY')
 
 # Enforce minimum length for SECRET_KEY
-if type(SECRET_KEY) is not str:
+if not isinstance(SECRET_KEY, str):
     raise ImproperlyConfigured(f"SECRET_KEY must be a string (found {type(SECRET_KEY).__name__})")
 if len(SECRET_KEY) < 50:
     raise ImproperlyConfigured(
@@ -463,6 +463,8 @@ X_FRAME_OPTIONS = 'SAMEORIGIN'
 # Static files (CSS, JavaScript, Images)
 STATIC_ROOT = BASE_DIR + '/static'
 STATIC_URL = f'/{BASE_PATH}static/'
+print(STATIC_ROOT)
+print(STATIC_URL)
 STATICFILES_DIRS = (
     os.path.join(BASE_DIR, 'project-static', 'dist'),
     os.path.join(BASE_DIR, 'project-static', 'img'),
